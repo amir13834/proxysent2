@@ -2,6 +2,7 @@ import asyncio
 import datetime
 import re
 import os
+from zoneinfo import ZoneInfo
 from telethon import TelegramClient, events, Button
 from telethon.errors.rpcerrorlist import (
     FloodWaitError, SessionPasswordNeededError, PhoneNumberInvalidError,
@@ -117,7 +118,7 @@ async def scheduler(user_client, bot_client, chat_id):
     print(f"Scheduler started for chat_id: {chat_id}")
     while True:
         try:
-            now = datetime.datetime.now().strftime("%H:%M")
+            now = datetime.datetime.now(ZoneInfo("Asia/Tehran")).strftime("%H:%M")
             if now in SCHEDULED_TIMES:
                 await bot_client.send_message(chat_id, "ℹ️ زمان ارسال فرا رسید، در حال اجرای عملیات زمان‌بندی شده...")
                 report = await copy_and_send_last_message(user_client)
