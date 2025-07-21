@@ -71,7 +71,7 @@ def decrypt_code(encrypted_code):
 
 def extract_proxy_details(text):
     lines = text.splitlines()
-    location = next((line.replace("**", "").replace("Location:", "").strip() for line in lines if 'Location' in line), 'N/A')
+    location = next((line.replace("**", "").replace("Location :", "").strip() for line in lines if 'Location' in line), 'N/A')
     secret_line = next((line for line in lines if 'Secret:' in line), '')
     url_match = re.search(r'(https?://\S+)', secret_line)
     link = url_match.group(1) if url_match else ''
